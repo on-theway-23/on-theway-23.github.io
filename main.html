@@ -3,38 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이상형 월드컵: 웹툰 추천</title>
+    <title>웹툰 추천</title>
     <style>
         body {
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
-        header {
-            position: absolute;
-            top: 0;
-            width: 100%;
+        .container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            border: 1px solid #000;
             display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        header .info-btn, header .help-btn {
-            background: none;
-            border: none;
-            font-size: 18px;
+        .popup-btn {
+            position: absolute;
+            border: 1px solid #000;
+            background-color: #fff;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
         }
+        .popup-btn.help {
+            top: 10px;
+            left: 10px;
+        }
+        .popup-btn.info {
+            bottom: 10px;
+            right: 10px;
+        }
         .title {
-            margin: 20px 0;
-            font-size: 36px;
-            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
         .buttons {
             display: flex;
@@ -44,28 +56,14 @@
         .buttons button {
             margin: 10px;
             padding: 10px 20px;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
-            border: none;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
+            border: 1px solid #000;
+            background-color: #fff;
             transition: background-color 0.3s;
         }
         .buttons button:hover {
-            background-color: #0056b3;
-        }
-        footer {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            padding: 10px 20px;
-        }
-        footer .info-btn {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
+            background-color: #f0f0f0;
         }
         .popup {
             display: none;
@@ -84,26 +82,21 @@
             padding: 5px 10px;
             font-size: 16px;
             cursor: pointer;
-            border: none;
-            background-color: #dc3545;
-            color: #fff;
-            border-radius: 5px;
+            border: 1px solid #000;
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
-    <header>
-        <button class="help-btn" onclick="togglePopup('help-popup')">?</button>
-        <div class="title">이상형 월드컵: 웹툰 추천</div>
-        <button class="info-btn" onclick="togglePopup('info-popup')">i</button>
-    </header>
-    <div class="buttons">
-        <button onclick="startGame()">시작하기</button>
-        <button onclick="showPreviousResults()">이전 결과</button>
+    <div class="container">
+        <div class="popup-btn help" onclick="togglePopup('help-popup')">?</div>
+        <div class="title">웹툰 추천</div>
+        <div class="buttons">
+            <button onclick="startGame()">시작하기</button>
+            <button onclick="showPreviousResults()">이전 결과</button>
+        </div>
+        <div class="popup-btn info" onclick="togglePopup('info-popup')">i</div>
     </div>
-    <footer>
-        <button class="info-btn" onclick="togglePopup('info-popup')">i</button>
-    </footer>
 
     <div id="help-popup" class="popup">
         <p>이 웹사이트는 당신의 취향에 맞는 웹툰을 추천해드립니다. '시작하기' 버튼을 눌러 이상형 월드컵을 시작하세요!</p>
