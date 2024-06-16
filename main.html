@@ -16,8 +16,8 @@
         }
         .container {
             position: relative;
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
             border: 1px solid #000;
             display: flex;
             flex-direction: column;
@@ -29,8 +29,8 @@
             position: absolute;
             border: 1px solid #000;
             background-color: #fff;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -45,8 +45,9 @@
             right: 10px;
         }
         .title {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin-top: 100px;
+            margin-bottom: 200px;
         }
         .buttons {
             display: flex;
@@ -89,37 +90,38 @@
 </head>
 <body>
     <div class="container">
-        <div class="popup-btn help" onclick="togglePopup('help-popup')">?</div>
+        <div class="popup-btn help" onclick="openPopup('siteinfo.html')">?</div>
         <div class="title">웹툰 추천</div>
         <div class="buttons">
             <button onclick="startGame()">시작하기</button>
             <button onclick="showPreviousResults()">이전 결과</button>
         </div>
-        <div class="popup-btn info" onclick="togglePopup('info-popup')">i</div>
-    </div>
-
-    <div id="help-popup" class="popup">
-        <p>이 웹사이트는 당신의 취향에 맞는 웹툰을 추천해드립니다. '시작하기' 버튼을 눌러 이상형 월드컵을 시작하세요!</p>
-        <button class="close-btn" onclick="togglePopup('help-popup')">닫기</button>
-    </div>
-    <div id="info-popup" class="popup">
-        <p>개발자 정보: Jane Doe, 버전: 1.0.0</p>
-        <button class="close-btn" onclick="togglePopup('info-popup')">닫기</button>
+        <a href="info.html" class="popup-btn info">i</a>
     </div>
 
     <script>
-        function togglePopup(popupId) {
-            const popup = document.getElementById(popupId);
-            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        function openPopup(url) {
+            window.open(url, 'popup', 'width=600,height=400');
+        }
+
+        function getCookie(name) {
+            let value = "; " + document.cookie;
+            let parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
         function startGame() {
-            // 여기에 이상형 월드컵 시작 로직 추가
-            alert('이상형 월드컵 시작!');
+            let name = getCookie("username");
+            if (!name) {
+                window.location.href = "name.html";
+            } else {
+                // 이상형 월드컵 시작 로직 추가
+                alert(`게임을 시작합니다, ${name}님!`);
+            }
         }
 
         function showPreviousResults() {
-            // 여기에 이전 결과 보기 로직 추가
+            // 이전 결과 보기 로직 추가
             alert('이전 결과 보기!');
         }
     </script>

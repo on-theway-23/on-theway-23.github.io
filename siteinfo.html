@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이트 정보</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+        }
+        h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        p {
+            white-space: pre-wrap;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>사이트 정보</h2>
+        <p>
+이 사이트는 웹툰을 추천해주는 사이트 입니다.
+이상형 월드컵과 비슷한 형태로 진행되며,
+선택한 결과에 따라 웹툰을 하나 추천 받습니다.
+이전 결과를 다시 볼 수 있으며,
+웹툰 이미지를 누르면 사이트로 연결됩니다.
+        </p>
+        <button onclick="window.close()">닫기</button>
+    </div>
+</body>
+</html>

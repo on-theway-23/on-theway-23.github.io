@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹툰 추천</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .home-btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .progress-container {
+            width: 50%;
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            height: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: #4caf50;
+            transition: width 0.3s;
+        }
+        .question {
+            margin: 100px;
+            font-size: 22px;
+            text-align: center;
+        }
+        .choices {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .choices button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .choices button:hover {
+            background-color: #f0f0f0;
+        }
+        .result-btn {
+            display: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .result-btn:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="home-btn" onclick="goHome()">홈</button>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="question" id="question">질문 1</div>
+        <div class="choices" id="choices">
+            <!-- 선택지 버튼들이 여기에 동적으로 추가될 예정 -->
+        </div>
+        <button class="result-btn" id="resultBtn" onclick="showResult()">결과 보기</button>
+    </div>
+
+    <script>
+        const questions = {
+            0: {
+                question: "선호하는 쪽",
+                choices: {
+                    "현실적": 2,
+                    "판타지": 1,
+                }
+            },
+            1: {
+                question: "흥미로운 것은?",
+                choices: {
+                    "현실 기반 판타지": 9,
+                    "와아아안전 판타지": 12
+                }
+            },
+            2: {
+                question: "좋아하는 장르",
+                choices: {
+                    "개그": 3,
+                    "일상": 6
+                }
+            },
+            3: {
+                question: "나는 ___이/가 좋다",
+                choices: {
+                    "혼자": 4,
+                    "여럿": 5
+                }
+            },
+            4: {
+                question: "둘 중 흥미로운 것",
+                choices: {
+                    "광기에 차있는": 15,
+                    "공감 100%": 15
+                }
+            },
+            5: {
+                question: "커플 vs 가족",
+                choices: {
+                    "커플": 15,
+                    "가족": 15
+                }
+            },
+            6: {
+                question: "즐거웠던 때",
+                choices: {
+                    "고등학생 때": 7,
+                    "그 외": 8
+                }
+            },
+            7: {
+                question: "예체능 vs 일반",
+                choices: {
+                    "예체능": 15,
+                    "일반": 15
+                }
+            },
+            8: {
+                question: "사람 vs 동물",
+                choices: {
+                    "사람": 15,
+                    "동물": 15
+                }
+            },
+            9: {
+                question: "회귀가 가능하다면?",
+                choices: {
+                    "한다": 10,
+                    "안한다": 11
+                }
+            },
+            10: {
+                question: "잘하고 싶은 것",
+                choices: {
+                    "뛰어난 발표": 15,
+                    "빠른 파악": 15
+                }
+            },
+            11: {
+                question: "잘 쓸 수 있는 능력",
+                choices: {
+                    "미래보기(조건부)": 15,
+                    "뛰어난 지능": 15
+                }
+            },
+            12: {
+                question: "주인공이",
+                choices: {
+                    "먼치킨이라 다 쓸고다님": 13,
+                    "성장캐라 어디까지 갈 지 모름": 14
+                }
+            },
+            13: {
+                question: "더 위험해보이는 인물",
+                choices: {
+                    "겉으로도 또라이, 속도 또라이": 15,
+                    "정상인 척하는 또라이": 15
+                }
+            },
+            14: {
+                question: "갖고 싶은 능력",
+                choices: {
+                    "개쩌는 연기력": 15,
+                    "엄청난 상황파악": 15
+                }
+            },
+            15: {
+                question: "추천 결과",
+                choices: {}
+            }
+        };
+
+        const resultUrls = {
+            "현실적-개그-혼자-광기에 차있는": "result1.html",
+            "현실적-개그-혼자-공감 100%": "result2.html",
+            "현실적-개그-여럿-광기에 차있는": "result3.html",
+            "현실적-개그-여럿-공감 100%": "result4.html",
+            "현실적-일상-혼자-광기에 차있는": "result5.html",
+            "현실적-일상-혼자-공감 100%": "result6.html",
+            "현실적-일상-여럿-광기에 차있는": "result7.html",
+            "현실적-일상-여럿-공감 100%": "result8.html",
+            "판타지-현실 기반 판타지-고등학생 때-예체능": "result9.html",
+            "판타지-현실 기반 판타지-고등학생 때-일반": "result10.html",
+            "판타지-현실 기반 판타지-그 외-예체능": "result11.html",
+            "판타지-현실 기반 판타지-그 외-일반": "result12.html",
+            "판타지-와아아안전 판타지-사람-커플": "result13.html",
+            "판타지-와아아안전 판타지-사람-가족": "result14.html",
+            "판타지-와아아안전 판타지-동물-커플": "result15.html",
+            "판타지-와아아안전 판타지-동물-가족": "result16.html",
+            // 여기에 더 많은 결과를 추가할 수 있습니다.
+        };
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            displayQuestion();
+        });
+
+        function goHome() {
+            window.location.href = "main.html";
+        }
+
+        function displayQuestion() {
+            if (currentQuestion in questions) {
+                const progressBar = document.getElementById("progressBar");
+                const progressPercent = (answers.length / 4) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+
+                document.getElementById("question").innerText = questions[currentQuestion].question;
+                const choicesDiv = document.getElementById("choices");
+                choicesDiv.innerHTML = '';
+
+                const choices = questions[currentQuestion].choices;
+                for (const [choice, nextQuestion] of Object.entries(choices)) {
+                    const button = document.createElement("button");
+                    button.innerText = choice;
+                    button.onclick = () => handleChoice(choice, nextQuestion);
+                    choicesDiv.appendChild(button);
+                }
+
+                if (currentQuestion === 15) {
+                    document.getElementById("choices").style.display = "none";
+                    document.getElementById("resultBtn").style.display = "block";
+                } else {
+                    document.getElementById("choices").style.display = "block";
+                    document.getElementById("resultBtn").style.display = "none";
+                }
+            }
+        }
+
+        function handleChoice(choice, nextQuestion) {
+            answers.push(choice);
+            currentQuestion = nextQuestion;
+            displayQuestion();
+        }
+
+        function showResult() {
+            const resultKey = answers.join("-");
+            const resultUrl = resultUrls[resultKey] || "defaultResult.html";
+            window.location.href = resultUrl;
+        }
+    </script>
+</body>
+</html>
