@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결과 목록</title>
+</head>
+<body>
+    <h1>저장된 결과 목록</h1>
+    <ul id="resultsList"></ul>
+
+    <script>
+        function getCookie(name) {
+            let value = "; " + document.cookie;
+            let parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        // 저장된 결과를 표시하는 함수
+        function displayResults() {
+            const resultsList = document.getElementById('resultsList');
+            const resultHistory = getCookie('resultHistory');
+            
+            if (resultHistory) {
+                const resultItem = document.createElement('li');
+                const resultLink = document.createElement('a');
+                resultLink.href = resultHistory;
+                resultLink.textContent = resultHistory;
+                resultItem.appendChild(resultLink);
+                resultsList.appendChild(resultItem);
+            } else {
+                const noResultsItem = document.createElement('li');
+                noResultsItem.textContent = '저장된 결과가 없습니다.';
+                resultsList.appendChild(noResultsItem);
+            }
+        }
+
+        // 페이지가 로드될 때 저장된 결과를 표시
+        document.addEventListener('DOMContentLoaded', displayResults);
+    </script>
+</body>
+</html>

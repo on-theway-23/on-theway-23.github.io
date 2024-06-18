@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>패스 이스터에그 창</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #home {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #recommendation {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #songTitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        #player {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="recommendation">오늘의 노래 추천</h1>
+    <div id="home" onclick="Home()">홈</div>
+
+    <div id="player"></div>
+
+    <script>
+        const songs = [
+            { title: "봄날", videoId: "gqzNl4eqZ-0" },
+            { title: "Dynamite", videoId: "gdZLi9oWNZg" },
+            { title: "지금 널 찾아가고 있어", videoId: "cFVwSKW2ySA" },
+            { title: "Crazy in Love", videoId: "Zi_IH0pShYE" },
+            { title: "Butter", videoId: "WMweEpGlu_U" },
+            { title: "Moonlight", videoId: "A53rrCecxtM" },
+            { title: "소용돌이", videoId: "7q9Ubv3othc" },
+            { title: "今 -明日 世界が終わっても", videoId: "vvN4FgqNXwE" }
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            playRandom();
+        });
+
+        function Home() {
+            window.location.href = "main.html"; // 홈 페이지로 이동할 경로 설정
+        }
+
+        function playRandom() {
+            const random = Math.floor(Math.random() * songs.length);
+            const selectedSong = songs[random];
+            const url = `https://www.youtube.com/embed/${selectedSong.videoId}`;
+            const iframe = document.createElement('iframe');
+            iframe.width = "560";
+            iframe.height = "315";
+            iframe.src = url;
+            iframe.frameborder = "0";
+            iframe.allowfullscreen = true;
+            document.getElementById('player').appendChild(iframe);
+        }
+    </script>
+</body>
+</html>

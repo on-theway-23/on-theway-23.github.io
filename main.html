@@ -92,7 +92,7 @@
         <div class="popup-btn help" onclick="openPopup('siteinfo.html')">?</div>
         <div class="title">웹툰 추천</div>
         <div class="buttons">
-            <button onclick="startGame()">시작하기</button>
+            <button onclick="start()">시작하기</button>
             <button onclick="showPreviousResults()">이전 결과</button>
         </div>
         <a href="info.html" class="popup-btn info">i</a>
@@ -109,7 +109,7 @@
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
 
-        function startGame() {
+        function start() {
             let name = getCookie("username");
             if (!name) {
                 window.location.href = "name.html";
@@ -119,8 +119,7 @@
         }
 
         function showPreviousResults() {
-            // 이전 결과 보기 로직 추가
-            alert('이전 결과 보기!');
+            alert('구현실패...');
         }
     </script>
 </body>

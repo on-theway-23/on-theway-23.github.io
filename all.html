@@ -11,7 +11,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
         .container {
@@ -32,7 +31,7 @@
             width: 100%;
             margin-bottom: 20px;
         }
-        .home-btn {
+        .home {
             padding: 5px 10px;
             font-size: 14px;
             cursor: pointer;
@@ -40,7 +39,7 @@
             background-color: #fff;
             transition: background-color 0.3s;
         }
-        .home-btn:hover {
+        .home:hover {
             background-color: #f0f0f0;
         }
         .grid {
@@ -69,7 +68,7 @@
             text-align: center;
             font-size: 14px;
         }
-        .start-btn {
+        .start {
             position: absolute;
             right: 20px;
             bottom: 20px;
@@ -80,10 +79,10 @@
             background-color: #fff;
             transition: background-color 0.3s;
         }
-        .start-btn:hover {
+        .start:hover {
             background-color: #f0f0f0;
         }
-        .easter-egg {
+        .easter {
             position: absolute;
             right: 20px;
             bottom: 80px;
@@ -98,7 +97,7 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        .easter-egg:hover {
+        .easter:hover {
             background-color: #45a049;
         }
     </style>
@@ -106,49 +105,46 @@
 <body>
     <div class="container">
         <div class="header">
-            <button class="home-btn" onclick="goHome()">홈</button>
+            <button class="home" onclick="Home()">홈</button>
         </div>
-        <div class="grid" id="webtoonGrid">
-            <!-- 웹툰 목록이 여기에 동적으로 추가될 예정 -->
+        <div class="grid" id="grid">
         </div>
-        <button class="start-btn" onclick="startChoosing()">시작하기</button>
-        <div class="easter-egg" onclick="easterEgg()">?</div>
+        <button class="start" onclick="start()">시작하기</button>
+        <div class="easter" onclick="easter()">?</div>
     </div>
 
     <script>
         const webtoons = [
-            { title: "웹툰1", imageUrl: "webtoon1.jpg", resultUrl: "result1.html" },
-            { title: "웹툰2", imageUrl: "webtoon2.jpg", resultUrl: "result2.html" },
-            { title: "웹툰3", imageUrl: "webtoon3.jpg", resultUrl: "result3.html" },
-            { title: "웹툰4", imageUrl: "webtoon4.jpg", resultUrl: "result4.html" },
-            { title: "웹툰5", imageUrl: "webtoon5.jpg", resultUrl: "result5.html" },
-            { title: "웹툰6", imageUrl: "webtoon6.jpg", resultUrl: "result6.html" },
-            { title: "웹툰7", imageUrl: "webtoon7.jpg", resultUrl: "result7.html" },
-            { title: "웹툰8", imageUrl: "webtoon8.jpg", resultUrl: "result8.html" },
-            { title: "웹툰9", imageUrl: "webtoon9.jpg", resultUrl: "result9.html" },
-            { title: "웹툰10", imageUrl: "webtoon10.jpg", resultUrl: "result10.html" },
-            { title: "웹툰11", imageUrl: "webtoon11.jpg", resultUrl: "result11.html" },
-            { title: "웹툰12", imageUrl: "webtoon12.jpg", resultUrl: "result12.html" },
-            { title: "웹툰13", imageUrl: "webtoon13.jpg", resultUrl: "result13.html" },
-            { title: "웹툰14", imageUrl: "webtoon14.jpg", resultUrl: "result14.html" },
-            { title: "웹툰15", imageUrl: "webtoon15.jpg", resultUrl: "result15.html" },
-            { title: "웹툰16", imageUrl: "webtoon16.jpg", resultUrl: "result16.html" },
+            { imageUrl: "1.webp", resultUrl: "result1.html" },
+            { imageUrl: "2.webp", resultUrl: "result2.html" },
+            { imageUrl: "3.webp", resultUrl: "result3.html" },
+            { imageUrl: "4.webp", resultUrl: "result4.html" },
+            { imageUrl: "5.webp", resultUrl: "result5.html" },
+            { imageUrl: "6.webp", resultUrl: "result6.html" },
+            { imageUrl: "7.webp", resultUrl: "result7.html" },
+            { imageUrl: "8.webp", resultUrl: "result8.html" },
+            { imageUrl: "9.webp", resultUrl: "result9.html" },
+            { imageUrl: "10.webp", resultUrl: "result10.html" },
+            { imageUrl: "11.webp", resultUrl: "result11.html" },
+            { imageUrl: "12.webp", resultUrl: "result12.html" },
+            { imageUrl: "13.webp", resultUrl: "result13.html" },
+            { imageUrl: "14.webp", resultUrl: "result14.html" },
+            { imageUrl: "15.webp", resultUrl: "result15.html" },
+            { imageUrl: "16.webp", resultUrl: "result16.html" },
         ];
 
         document.addEventListener("DOMContentLoaded", () => {
-            const grid = document.getElementById("webtoonGrid");
+            const grid = document.getElementById("grid");
             webtoons.forEach(webtoon => {
                 const webtoonDiv = document.createElement("div");
                 webtoonDiv.className = "webtoon";
                 webtoonDiv.onclick = () => openWebtoon(webtoon.resultUrl);
 
                 const img = document.createElement("img");
-                img.src = webtoon.imageUrl;
+                img.src = "img/" + webtoon.imageUrl;
                 img.alt = webtoon.title;
 
                 const title = document.createElement("div");
-                title.className = "webtoon-title";
-                title.innerText = webtoon.title;
 
                 webtoonDiv.appendChild(img);
                 webtoonDiv.appendChild(title);
@@ -156,16 +152,16 @@
             });
         });
 
-        function goHome() {
+        function Home() {
             window.location.href = "main.html";
         }
 
-        function startChoosing() {
+        function start() {
             window.location.href = "choose.html";
         }
 
-        function easterEgg() {
-            alert("이스터에그 발견!");
+        function easter() {
+            window.location.href = "easter.html";
         }
 
         function openWebtoon(url) {
