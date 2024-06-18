@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹툰 목록</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            border: 1px solid #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .home-btn {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .home-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        .webtoon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .webtoon img {
+            width: 100px; /* 웹툰 이미지의 너비 */
+            height: 150px; /* 웹툰 이미지의 높이 */
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .webtoon img:hover {
+            transform: scale(1.05);
+        }
+        .webtoon-title {
+            margin-top: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .start-btn {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #000;
+            background-color: #fff;
+            transition: background-color 0.3s;
+        }
+        .start-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .easter-egg {
+            position: absolute;
+            right: 20px;
+            bottom: 80px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #4caf50;
+            color: #fff;
+            font-size: 30px;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .easter-egg:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="home-btn" onclick="goHome()">홈</button>
+        </div>
+        <div class="grid" id="webtoonGrid">
+            <!-- 웹툰 목록이 여기에 동적으로 추가될 예정 -->
+        </div>
+        <button class="start-btn" onclick="startChoosing()">시작하기</button>
+        <div class="easter-egg" onclick="easterEgg()">?</div>
+    </div>
+
+    <script>
+        const webtoons = [
+            { title: "웹툰1", imageUrl: "webtoon1.jpg", resultUrl: "result1.html" },
+            { title: "웹툰2", imageUrl: "webtoon2.jpg", resultUrl: "result2.html" },
+            { title: "웹툰3", imageUrl: "webtoon3.jpg", resultUrl: "result3.html" },
+            { title: "웹툰4", imageUrl: "webtoon4.jpg", resultUrl: "result4.html" },
+            { title: "웹툰5", imageUrl: "webtoon5.jpg", resultUrl: "result5.html" },
+            { title: "웹툰6", imageUrl: "webtoon6.jpg", resultUrl: "result6.html" },
+            { title: "웹툰7", imageUrl: "webtoon7.jpg", resultUrl: "result7.html" },
+            { title: "웹툰8", imageUrl: "webtoon8.jpg", resultUrl: "result8.html" },
+            { title: "웹툰9", imageUrl: "webtoon9.jpg", resultUrl: "result9.html" },
+            { title: "웹툰10", imageUrl: "webtoon10.jpg", resultUrl: "result10.html" },
+            { title: "웹툰11", imageUrl: "webtoon11.jpg", resultUrl: "result11.html" },
+            { title: "웹툰12", imageUrl: "webtoon12.jpg", resultUrl: "result12.html" },
+            { title: "웹툰13", imageUrl: "webtoon13.jpg", resultUrl: "result13.html" },
+            { title: "웹툰14", imageUrl: "webtoon14.jpg", resultUrl: "result14.html" },
+            { title: "웹툰15", imageUrl: "webtoon15.jpg", resultUrl: "result15.html" },
+            { title: "웹툰16", imageUrl: "webtoon16.jpg", resultUrl: "result16.html" },
+        ];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const grid = document.getElementById("webtoonGrid");
+            webtoons.forEach(webtoon => {
+                const webtoonDiv = document.createElement("div");
+                webtoonDiv.className = "webtoon";
+                webtoonDiv.onclick = () => openWebtoon(webtoon.resultUrl);
+
+                const img = document.createElement("img");
+                img.src = webtoon.imageUrl;
+                img.alt = webtoon.title;
+
+                const title = document.createElement("div");
+                title.className = "webtoon-title";
+                title.innerText = webtoon.title;
+
+                webtoonDiv.appendChild(img);
+                webtoonDiv.appendChild(title);
+                grid.appendChild(webtoonDiv);
+            });
+        });
+
+        function goHome() {
+            window.location.href = "main.html";
+        }
+
+        function startChoosing() {
+            window.location.href = "choose.html";
+        }
+
+        function easterEgg() {
+            alert("이스터에그 발견!");
+        }
+
+        function openWebtoon(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

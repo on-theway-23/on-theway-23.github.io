@@ -11,7 +11,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
         .container {
@@ -34,7 +33,7 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        .home-btn {
+        .home {
             padding: 5px 10px;
             font-size: 14px;
             cursor: pointer;
@@ -79,7 +78,7 @@
         .choices button:hover {
             background-color: #f0f0f0;
         }
-        .result-btn {
+        .result {
             display: none;
             padding: 10px 20px;
             font-size: 18px;
@@ -88,7 +87,7 @@
             background-color: #fff;
             transition: background-color 0.3s;
         }
-        .result-btn:hover {
+        .result:hover {
             background-color: #f0f0f0;
         }
     </style>
@@ -96,7 +95,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <button class="home-btn" onclick="goHome()">홈</button>
+            <button class="home" onclick="goHome()">홈</button>
             <div class="progress-container">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
@@ -105,7 +104,7 @@
         <div class="choices" id="choices">
             <!-- 선택지 버튼들이 여기에 동적으로 추가될 예정 -->
         </div>
-        <button class="result-btn" id="resultBtn" onclick="showResult()">결과 보기</button>
+        <button class="result" id="resultBtn" onclick="showResult()">결과 보기</button>
     </div>
 
     <script>
@@ -224,20 +223,20 @@
         const resultUrls = {
             "현실적-개그-혼자-광기에 차있는": "result1.html",
             "현실적-개그-혼자-공감 100%": "result2.html",
-            "현실적-개그-여럿-광기에 차있는": "result3.html",
-            "현실적-개그-여럿-공감 100%": "result4.html",
-            "현실적-일상-혼자-광기에 차있는": "result5.html",
-            "현실적-일상-혼자-공감 100%": "result6.html",
-            "현실적-일상-여럿-광기에 차있는": "result7.html",
-            "현실적-일상-여럿-공감 100%": "result8.html",
-            "판타지-현실 기반 판타지-고등학생 때-예체능": "result9.html",
-            "판타지-현실 기반 판타지-고등학생 때-일반": "result10.html",
-            "판타지-현실 기반 판타지-그 외-예체능": "result11.html",
-            "판타지-현실 기반 판타지-그 외-일반": "result12.html",
-            "판타지-와아아안전 판타지-사람-커플": "result13.html",
-            "판타지-와아아안전 판타지-사람-가족": "result14.html",
-            "판타지-와아아안전 판타지-동물-커플": "result15.html",
-            "판타지-와아아안전 판타지-동물-가족": "result16.html",
+            "현실적-개그-여럿-커플": "result3.html",
+            "현실적-개그-여럿-가족": "result4.html",
+            "현실적-일상-고등학생 때-예체능": "result5.html",
+            "현실적-일상-고등학생 때-일반": "result6.html",
+            "현실적-일상-그 외-사람": "result7.html",
+            "현실적-일상-그 외-동물": "result8.html",
+            "판타지-현실 기반 판타지-한다-빠른 파악": "result9.html",
+            "판타지-현실 기반 판타지-한다-뛰어난 발표": "result10.html",
+            "판타지-현실 기반 판타지-안한다-미래보기(조건부)": "result11.html",
+            "판타지-현실 기반 판타지-안한다-뛰어난 지능": "result12.html",
+            "판타지-와아아안전 판타지-먼치킨이라 다 쓸고다님-겉으로도 또라이, 속도 또라이": "result13.html",
+            "판타지-와아아안전 판타지-먼치킨이라 다 쓸고다님-정상인 척하는 또라이": "result14.html",
+            "판타지-와아아안전 판타지-성장캐라 어디까지 갈 지 모름-개쩌는 연기력": "result15.html",
+            "판타지-와아아안전 판타지-성장캐라 어디까지 갈 지 모름-엄청난 상황파악": "result16.html",
             // 여기에 더 많은 결과를 추가할 수 있습니다.
         };
 

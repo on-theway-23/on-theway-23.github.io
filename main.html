@@ -11,7 +11,6 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
         .container {
@@ -115,8 +114,7 @@
             if (!name) {
                 window.location.href = "name.html";
             } else {
-                // 이상형 월드컵 시작 로직 추가
-                alert(`게임을 시작합니다, ${name}님!`);
+                window.location.href = "choose.html"
             }
         }
 
