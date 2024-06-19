@@ -27,7 +27,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             font-size: 18px;
+            padding: 5px;
         }
         .right {
             width: 70%;
@@ -61,7 +63,8 @@
 <body>
     <div class="container">
         <div class="left">
-            <div id="webtoon-recommendation">추천 웹툰</div>
+            <div id="title"></div><br>
+            <div id="reason"></div>
         </div>
         <div class="right">
             <div class="info">
@@ -97,15 +100,17 @@
         document.addEventListener("DOMContentLoaded", function() {
             // 추천 웹툰 생성
             const webtoons = [
-                "웹툰 1", 
-                "웹툰 2", 
-                "웹툰 3", 
-                "웹툰 4", 
-                "웹툰 5", 
-                "웹툰 6"
+                { title: "상남자", reason: "회장 사장이 회귀해서 펼치는 개 쩌는 오피스물" },
+                { title: "배우로서 살겠다(카카오)", reason: "과거를 후회하는 배우가 회귀하고 펼치는 명연기들. 표정 묘사가 예술" },
+                { title: "악역의 엔딩은 죽음뿐(카카오)", reason: "가끔 답답한 거 보고 싶을 때 굿" },
+                { title: "신인인데 천만배우(카카오)", reason: "가볍게 보기 좋은 배우물" },
+                { title: "이번 생은 가주가 되겠습니다(카카오)", reason: "능력있는 여주 최고...!근데 남주도 잘생겨서 눈도 호강할 수 있음" }
             ];
-            const randomIndex = Math.floor(Math.random() * 6);
-            document.getElementById("webtoon-recommendation").innerText = webtoons[randomIndex];
+
+            const randomIndex = Math.floor(Math.random() * webtoons.length);
+            const selectedWebtoon = webtoons[randomIndex];
+            document.getElementById("title").innerText = selectedWebtoon.title;
+            document.getElementById("reason").innerText = selectedWebtoon.reason;
 
             // 지도 API 초기화 (예: Google Maps API)
             function initMap() {
@@ -117,7 +122,7 @@
 
             // Google Maps API 스크립트 동적 로드
             var script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyDMjEIpBOfRGP2xelp-mJcdTw1RLACB5Og&callback=initMap`;
             script.defer = true;
             script.async = true;
             document.head.appendChild(script);
